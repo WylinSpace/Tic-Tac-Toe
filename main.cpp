@@ -23,7 +23,7 @@ using namespace std;
 #define STRIKETHROUGH   "\033[9m"
 
 //CURSOR MOVEMENT
-#define MOVE_CURSOR(row, col) "\033["
+#define MOVE_CURSOR(row, col) "\033[" #row ";" #col "H"
 #define CLEAR_SCREEN "\033[2J"
 #define CLEAR_TO_END "\033[0J"
 #define SAVE_CURSOR "\033[s"
@@ -48,12 +48,13 @@ class TicTacToe{
     void versusMode(){
         cout<<MOVE_CURSOR(0,0)<<CLEAR_SCREEN<<BOLD<<BLUE<<"TIC TAC TOE - Versus Mode\n"<<RESET<<endl;
         do{
-            regex pattern("^[1-9]$");
+            regex pattern("^[0-9]$");
             printInterface();
             if(WinCheck()) break;
             if(EmptyCheck()) break;
             cout<<"\nEnter Your Coordinate > ";
             cin>>positionSet;
+            if(positionSet=="0") break;
             if (regex_match(positionSet, pattern)) {
                 int position = stoi(positionSet);
                 enterTheOption(position);
@@ -67,13 +68,14 @@ class TicTacToe{
     void computerMode(){
         cout<<MOVE_CURSOR(0,0)<<CLEAR_SCREEN<<BOLD<<BLUE<<"TIC TAC TOE - Computer Mode\n"<<RESET<<endl;
         do{
-            regex pattern("^[1-9]$");
+            regex pattern("^[0-9]$");
             printInterface();
             if(WinCheck()) break;
             if(EmptyCheck()) break;
             cout<<"\nEnter Your Coordinate > ";
             cin>>positionSet;
             if (regex_match(positionSet, pattern)) {
+                if(positionSet=="0") break;
                 int position = stoi(positionSet);
                 enterTheOption(position);
             } else {
@@ -265,7 +267,7 @@ int main(){
         do{
             cout<<"\nPlease Choose Your Game Mode > ";
             cin >> Gamemode;
-            regex pattern("^[1-3]$");
+            regex pattern("^[1-2]$");
             if (regex_match(Gamemode, pattern)) {
                 mode = stoi(Gamemode);
                 break;
