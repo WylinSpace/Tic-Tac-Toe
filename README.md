@@ -1,6 +1,6 @@
 # Tic Tac Toe - Console Game
 
-##Prefix
+## Prefix
 Fully writen and construct fully by **LIEW WEN HAO**.
 
 
